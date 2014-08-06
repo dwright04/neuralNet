@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Welcome to NeuralNet’s documentation! &mdash; NeuralNet 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="NeuralNet 1.0.0 documentation" href="#" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">NeuralNet 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="welcome-to-neuralnet-s-documentation">
+<h1>Welcome to NeuralNet&#8217;s documentation!<a class="headerlink" href="#welcome-to-neuralnet-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+</div>
+<div class="section" id="module-NeuralNet">
+<span id="neuralnet"></span><h1>NeuralNet<a class="headerlink" href="#module-NeuralNet" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="neuralnetwork">
+<h2>NeuralNetwork<a class="headerlink" href="#neuralnetwork" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="NeuralNet.NeuralNetwork">
+<em class="property">class </em><tt class="descclassname">NeuralNet.</tt><tt class="descname">NeuralNetwork</tt><big>(</big><em>architecture={1: 25}</em>, <em>LAMBDA=0.0</em>, <em>neuron='sigmoid'</em>, <em>optimiser='fmin_cg'</em>, <em>maxiter=1000</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple feed forward neural network.</p>
+<p>The NeuralNet should behave as if it inherited from sklearn.base.BaseEstimator,
+but without being dependent on sklearn.  This NeuralNet has been designed to
+interact with sklearn grid_search.GridSearch or any functionality of the
+cross_validation module.</p>
+<p class="rubric">Notes</p>
+<p>More neuron types are likely to be added in the future.
+More optimisation functions are likely to be added in future.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="40%" />
+<col width="52%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>architecture</td>
+<td>dict of int keys and int values, optional (default={1:25})</td>
+<td>Defines the hidden layers (keys) and number of neurons (values).</td>
+</tr>
+<tr class="row-even"><td>LAMBDA</td>
+<td>float, optional (default=0.0)</td>
+<td>Regularization parameter.</td>
+</tr>
+<tr class="row-odd"><td>neuron</td>
+<td>string, optional (default=&#8217;sigmoid&#8217;)</td>
+<td>Specifies the type of neuron to use.  It must be one of &#8216;sigmoid&#8217; or &#8216;tanh&#8217;.</td>
+</tr>
+<tr class="row-even"><td>optimiser</td>
+<td>string, optional (default=&#8217;fmin_cg&#8217;)</td>
+<td>Algorithm to use for optimisation of neural network parameters.  Must be one
+of &#8216;grad_decent&#8217;, &#8216;stoch_grad_decent&#8217; or &#8216;fmin_cg&#8217;.</td>
+</tr>
+<tr class="row-odd"><td>maxiter</td>
+<td>int, optional (default=1000)</td>
+<td>Maximum number of iterations for the optimisation algorithm.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>fit(X, y)</td>
+<td>Fit the neural network model according to the given training data.</td>
+</tr>
+<tr class="row-even"><td>get_params([deep])</td>
+<td>Get parameters for this estimator.</td>
+</tr>
+<tr class="row-odd"><td>predict(X)</td>
+<td>Perform classification on samples in X.</td>
+</tr>
+<tr class="row-even"><td>set_params(<a href="#id1"><span class="problematic" id="id2">**</span></a>params)</td>
+<td>Set the parameters of this estimator.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.backProp">
+<tt class="descname">backProp</tt><big>(</big><em>thetas</em>, <em>hypothesis</em>, <em>activs</em>, <em>targets</em>, <em>m</em>, <em>dneuron</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.backProp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.feedForward">
+<tt class="descname">feedForward</tt><big>(</big><em>thetas</em>, <em>input</em>, <em>regTerm</em>, <em>m</em>, <em>neuron</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.feedForward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.fit">
+<tt class="descname">fit</tt><big>(</big><em>X</em>, <em>y</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the Neural Network model according to the training data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : nd_array, shape(m, n)</p>
+<blockquote>
+<div><p>Training vectors , where m is the number of training samples and n is
+the number of features.</p>
+</div></blockquote>
+<p><strong>y</strong> : nd_array, shape(m,)</p>
+<blockquote>
+<div><p>Target values (class lables for classification, real numbers for regression).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>self</strong> : object</p>
+<blockquote class="last">
+<div><p>Returns self.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.initialise">
+<tt class="descname">initialise</tt><big>(</big><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.initialise" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.labelsToIndicatorFunction">
+<tt class="descname">labelsToIndicatorFunction</tt><big>(</big><em>y</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.labelsToIndicatorFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>The indicator function maps the targets for a classification problem from
+integers to vectors of 1&#8217;s and 0&#8217;s.  For a 3 class problem the targets are
+mapped as shown below:</p>
+<p>target      indicator function
+1             [1, 0, 0]
+2             [0, 1, 0]
+3             [0, 0, 1]</p>
+<p>This implementation assumes that labels are indexed from 1 not 0.</p>
+<p>parameters:</p>
+<p>targets: &lt;numpy-array&gt; 1xm vector of discrete class labels/targets.</p>
+<p>returns:</p>
+<p>indicatorFunction: &lt;numpy-array&gt; kxm array, where k is the number of classes
+and m the number of training examples.  The indicator function
+produces a kx1 vector denoting which class a given training example
+belongs to.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.predict">
+<tt class="descname">predict</tt><big>(</big><em>X</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.predict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.randInitParams">
+<tt class="descname">randInitParams</tt><big>(</big><em>nIn</em>, <em>nOut</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.randInitParams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.reshapeParams">
+<tt class="descname">reshapeParams</tt><big>(</big><em>params</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.reshapeParams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="NeuralNet.NeuralNetwork.setattr">
+<tt class="descname">setattr</tt><big>(</big><em>parameter</em>, <em>value</em><big>)</big><a class="headerlink" href="#NeuralNet.NeuralNetwork.setattr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-Neuron">
+<span id="neuron"></span><h1>Neuron<a class="headerlink" href="#module-Neuron" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id3">
+<h2>Neuron<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Neuron.Neuron">
+<em class="property">class </em><tt class="descclassname">Neuron.</tt><tt class="descname">Neuron</tt><a class="headerlink" href="#Neuron.Neuron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Neuron to be used in conjunction with NeuralNet objects.</p>
+<p>This is an abstract class whose methods should be overridden by
+subclasses defining the behaviour of specific neuron types.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>fire(stimuli)</td>
+<td>calculate the firing of the neuron given the stimuli.</td>
+</tr>
+<tr class="row-even"><td>dfire(stimuli)</td>
+<td>calculate the derivative of the neuron fire function
+given the input stimuli.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="Neuron.Neuron.dfire">
+<tt class="descname">dfire</tt><big>(</big><em>stimuli</em><big>)</big><a class="headerlink" href="#Neuron.Neuron.dfire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derivative of the activation function defined in fire method.</p>
+<p>Must be overriden by subclasses.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimuli</strong> : float or nd_array</p>
+<blockquote class="last">
+<div><p>Input to a neuron or a layer of neurons, where each element
+of an array corresponds to an individual neuron.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Neuron.Neuron.fire">
+<tt class="descname">fire</tt><big>(</big><em>stimuli</em><big>)</big><a class="headerlink" href="#Neuron.Neuron.fire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activation function for a neuron.</p>
+<p>Must be overriden by subclasses.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimuli</strong> : float or nd_array</p>
+<blockquote class="last">
+<div><p>Input to a neuron or a layer of neurons, where each element
+of an array corresponds to an individual neuron.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="sigmoidneuron">
+<h2>SigmoidNeuron<a class="headerlink" href="#sigmoidneuron" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Neuron.SigmoidNeuron">
+<em class="property">class </em><tt class="descclassname">Neuron.</tt><tt class="descname">SigmoidNeuron</tt><a class="headerlink" href="#Neuron.SigmoidNeuron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Neuron object to be used in conjunction with NeuralNet objects.</p>
+<p>This is a concrete implementation of the Neuron abstract class
+for a sigmoid neuron.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>fire(stimuli)</td>
+<td>calculate the firing of the neuron given the stimuli.</td>
+</tr>
+<tr class="row-even"><td>dfire(stimuli)</td>
+<td>calculate the derivative of the neuron fire function
+given the input stimuli.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="Neuron.SigmoidNeuron.dfire">
+<tt class="descname">dfire</tt><big>(</big><em>stimuli</em><big>)</big><a class="headerlink" href="#Neuron.SigmoidNeuron.dfire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derivative of the sigmoid activation function defined in fire method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimuli</strong> : float or nd_array</p>
+<blockquote>
+<div><p>Input to a neuron or a layer of neurons, where each element
+of an array corresponds to an individual neuron.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dactivation</strong> : float or nd_array</p>
+<blockquote class="last">
+<div><p>The result of calculating the derivative of the sigmoid
+function on the stimuli.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Neuron.SigmoidNeuron.fire">
+<tt class="descname">fire</tt><big>(</big><em>stimuli</em><big>)</big><a class="headerlink" href="#Neuron.SigmoidNeuron.fire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activation of a sigmoid function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimuli</strong> : float or nd_array</p>
+<blockquote>
+<div><p>Input to a neuron or a layer of neurons, where each element
+of an array corresponds to an individual neuron.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>activation</strong> : float or nd_array</p>
+<blockquote class="last">
+<div><p>The result of calculating the sigmoid function on the stimuli.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="tanhneuron">
+<h2>TanhNeuron<a class="headerlink" href="#tanhneuron" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="Neuron.TanhNeuron">
+<em class="property">class </em><tt class="descclassname">Neuron.</tt><tt class="descname">TanhNeuron</tt><a class="headerlink" href="#Neuron.TanhNeuron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Neuron object to be used in conjunction with NeuralNet objects.</p>
+<p>This is a concrete implementation of the Neuron abstract class
+for a tanh neuron.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>fire(stimuli)</td>
+<td>calculate the firing of the neuron given the stimuli.</td>
+</tr>
+<tr class="row-even"><td>dfire(stimuli)</td>
+<td>calculate the derivative of the neuron fire function
+given the input stimuli.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="Neuron.TanhNeuron.dfire">
+<tt class="descname">dfire</tt><big>(</big><em>stimuli</em><big>)</big><a class="headerlink" href="#Neuron.TanhNeuron.dfire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derivative of the tanh activation function defined in fire method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimuli</strong> : float or nd_array</p>
+<blockquote>
+<div><p>Input to a neuron or a layer of neurons, where each element
+of an array corresponds to an individual neuron.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dactivation</strong> : float or nd_array</p>
+<blockquote class="last">
+<div><p>The result of calculating the derivative of the tanh function
+on the stimuli.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="Neuron.TanhNeuron.fire">
+<tt class="descname">fire</tt><big>(</big><em>stimuli</em><big>)</big><a class="headerlink" href="#Neuron.TanhNeuron.fire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Activation of a tanh function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>stimuli</strong> : float or nd_array</p>
+<blockquote>
+<div><p>Input to a neuron or a layer of neurons, where each element
+of an array corresponds to an individual neuron.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>activation</strong> : float or nd_array</p>
+<blockquote class="last">
+<div><p>The result of calculating the tanh function on the stimuli.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to NeuralNet&#8217;s documentation!</a></li>
+<li><a class="reference internal" href="#module-NeuralNet">NeuralNet</a><ul>
+<li><a class="reference internal" href="#neuralnetwork">NeuralNetwork</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-Neuron">Neuron</a><ul>
+<li><a class="reference internal" href="#id3">Neuron</a></li>
+<li><a class="reference internal" href="#sigmoidneuron">SigmoidNeuron</a></li>
+<li><a class="reference internal" href="#tanhneuron">TanhNeuron</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="np-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="#">NeuralNet 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Darryl Wright.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
