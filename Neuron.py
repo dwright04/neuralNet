@@ -81,15 +81,14 @@ class SigmoidNeuron(Neuron):
         """
         return (1 / (1 + np.exp(-stimuli)))
 
-    def dfire(self, stimuli):
+    def dfire(self, activation):
         """
         Derivative of the sigmoid activation function defined in fire method.
         
         Parameters
         ----------
-        stimuli : float or nd_array
-            Input to a neuron or a layer of neurons, where each element
-            of an array corresponds to an individual neuron.
+        activation : float or nd_array
+            The result of the fire() method on a stimuli
             
         Returns
         -------
@@ -97,7 +96,7 @@ class SigmoidNeuron(Neuron):
             The result of calculating the derivative of the sigmoid
             function on the stimuli.
         """
-        return np.multiply(self.fire(stimuli), (1 - self.fire(stimuli)))
+        return np.multiply(self.fire(activation), (1 - self.fire(activation)))
 
 class TanhNeuron(Neuron):
     """
