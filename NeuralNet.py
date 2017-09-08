@@ -129,7 +129,7 @@ class NeuralNetwork(object):
         print(("[*] Training %s" % (self)))
 
         try:
-            y = indicatorFunction(y)
+            y = oneHotEncoding(y)
         except AttributeError:
             y = y
 
@@ -208,7 +208,7 @@ class NeuralNetwork(object):
             lastIndex = lastIndex + (self.architecture[layer] * (self.architecture[layer-1] + 1))
         return thetas
 
-    def labelsToIndicatorFunction(self, y):
+    def oneHotEncoding(self, y):
         """
         The indicator function maps the targets for a classification problem from
         integers to vectors of 1's and 0's.  For a 3 class problem the targets are
