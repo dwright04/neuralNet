@@ -96,7 +96,7 @@ class SigmoidNeuron(Neuron):
             The result of calculating the derivative of the sigmoid
             function on the stimuli.
         """
-        return np.multiply(self.fire(activation), (1 - self.fire(activation)))
+        return np.multiply(activation, (1 - activation))
 
 class TanhNeuron(Neuron):
     """
