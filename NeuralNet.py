@@ -50,12 +50,20 @@ class NeuralNetwork(object):
     """
 
     def __init__(self, architecture={1:25}, LAMBDA=0.0, neuron='sigmoid', optimiser='fmin_cg', maxiter=1000):
-
+        ### Do some house keeping ###
+        from scipy import optimize
+        scipy_optimisers = {'fmin_cg':optimize.fmin_cg, \
+                            'fmin_bfgs':optimize.fmin_bfgs}
         self.architecture = architecture
         self.LAMBDA = LAMBDA
         self.neuron = neuron
-        self.optimiser = optimiser
         self.maxiter = maxiter
+        # setup the optimiser
+        try:
+          self.optimiser = scipy_optimisers[optimiser]
+        except:
+            raise NotImplementedError
+            # TODO : gradient descent
         # private variable to store trained parameters of the network.
         self._trainedParams = None
     
@@ -80,10 +88,6 @@ class NeuralNetwork(object):
         self : object
             Returns self.
         """
-        ### Do some house keeping ###
-        from scipy import optimize
-        scipy_optimisers = {'fmin_cg':optimize.fmin_cg, \
-                            'fmin_bfgs':optimize.fmin_bfgs}
         # remove any padded dimensions.
         X = np.squeeze(X)
         y = np.squeeze(y)
@@ -98,12 +102,6 @@ class NeuralNetwork(object):
         elif len(np.unique(y)) == 2:
             # if number of labels = 2 set the size of output layer to 1.
             self.architecture[len(list(self.architecture.keys()))] = 1
-        # setup the optimiser
-        try:
-          self.optimiser = scipy_optimisers[self.optimiser]
-        except:
-            raise NotImplementedError
-            # TODO : gradient descent
 
         ### Get the right neurons ###
         if self.neuron == 'sigmoid':
