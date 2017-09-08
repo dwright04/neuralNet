@@ -82,8 +82,7 @@ class NeuralNetwork(object):
         """
         ### Do some house keeping ###
         from scipy import optimize
-        scipy_optimisers = {'fmin_cg':optimize.fmin_cg, \
-                            'fmin_bfgs':optimize.fmin_bfgs}
+        scipy_optimisers = ['fmin_cg', 'fmin_bfgs']
         # remove any padded dimensions.
         X = np.squeeze(X)
         y = np.squeeze(y)
@@ -99,11 +98,11 @@ class NeuralNetwork(object):
             # if number of labels = 2 set the size of output layer to 1.
             self.architecture[len(list(self.architecture.keys()))] = 1
         # setup the optimiser
-        try:
-          self.optimiser = scipy_optimisers[self.optimiser]
-        except:
-            raise NotImplementedError
-            # TODO : gradient descent
+        if self.optimiser in scipy_optimisers:
+            pass
+        else:
+            pass
+            # gradient descent
 
         ### Get the right neurons ###
         if self.neuron == 'sigmoid':
@@ -126,7 +125,7 @@ class NeuralNetwork(object):
             cost, grad = self.costFunction(params, input, targets)
             return grad
         
-        print(("[*] Training %s" % (self)))
+        print("[*] Training %s" % (self))
 
         try:
             y = indicatorFunction(y)
